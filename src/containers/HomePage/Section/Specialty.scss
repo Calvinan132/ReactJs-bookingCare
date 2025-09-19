@@ -1,0 +1,74 @@
+.Specialty-container {
+  height: 350px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .Specialty-content {
+    height: auto;
+    width: 80%;
+    .seeMore {
+      position: absolute;
+      // border: 1px solid gray;
+      display: flex;
+      top: 12%;
+      right: 11%;
+      width: 100px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      background-color: #eeee;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .slider-title {
+      padding: 10px;
+    }
+    .slick-slider {
+      height: 100%;
+      .slick-next {
+        border: 1px solid grey;
+        height: 40px;
+        width: 50px;
+        z-index: 1;
+        background-color: white;
+        &::before {
+          content: ">";
+          font-size: 24px;
+          color: grey;
+          font-weight: bold;
+        }
+      }
+      .slick-prev {
+        border: 1px solid grey;
+        height: 40px;
+        width: 50px;
+        z-index: 1;
+        background-color: #ffffff;
+        &::before {
+          content: "<";
+          font-size: 24px;
+          color: grey;
+          font-weight: bold;
+        }
+      }
+      .slick-list {
+        height: inherit;
+        width: inherit;
+        .slick-slide {
+          padding: 0 10px; // khoảng cách 2 bên slide
+        }
+        .img {
+          height: 150px;
+          width: 100% !important;
+          background-repeat: no-repeat !important;
+          background-size: cover !important;
+          // border: 2px solid red;
+          background-color: #f9f9f9 !important;
+        }
+      }
+    }
+  }
+}

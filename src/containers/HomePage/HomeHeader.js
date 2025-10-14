@@ -6,6 +6,7 @@ import { LANGUAGES } from "../../utils";
 import { changeLanguageAction } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { path } from "../../utils";
+import * as actions from "../../store/actions";
 
 import img1 from "../../assets/Banner-Option/kham_chuyenkhoa.png";
 import img2 from "../../assets/Banner-Option/kham_tuxa.png";
@@ -127,6 +128,7 @@ class HomeHeader extends Component {
     }
   };
   render() {
+    const { processLogout, userInfo } = this.props;
     let nowLang = this.props.language;
     return (
       <React.Fragment>
@@ -220,7 +222,7 @@ class HomeHeader extends Component {
             onClick={(e) => e.stopPropagation()}
           >
             <ul>
-              <li>
+              <li className="sub-nav-welcome">
                 <i
                   onClick={(e) => this.handleSubNav(e)}
                   className="fas fa-times"
@@ -233,15 +235,26 @@ class HomeHeader extends Component {
                     cursor: "pointer",
                   }}
                 ></i>
+                <div style={{ position: "absolute" }}>
+                  <FormattedMessage id="homeHeader.Welcome"></FormattedMessage>{" "}
+                  {userInfo && userInfo.firstName ? userInfo.firstName : ""} !
+                </div>
               </li>
               <li>
-                <div className="sub-nav-title">Trang chủ</div>
-                <i className="fas fa-home"></i>
+                <div className="li-wrapper">
+                  <div className="sub-nav-title">Trang chủ</div>
+                  <i className="fas fa-home"></i>
+                </div>
               </li>
-              <li>
-                <Link to={path.SYSTEM}>
+              <li style={userInfo.roleId !== "1" ? { display: "none" } : {}}>
+                <Link to={path.SYSTEM} className="li-wrapper">
                   Quản lý <i className="fas fa-tasks"></i>
                 </Link>
+              </li>
+              <li>
+                <div className="li-wrapper" onClick={processLogout}>
+                  Đăng xuất<i className="fas fa-sign-out-alt"></i>
+                </div>
               </li>
             </ul>
           </div>
@@ -286,6 +299,7 @@ class HomeHeader extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
     language: state.app.language,
   };
 };
@@ -294,6 +308,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeLanguageActionRedux: (language) =>
       dispatch(changeLanguageAction(language)),
+    processLogout: () => dispatch(actions.processLogout()),
   };
 };
 

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import UserManage from "../containers/System/UserManage";
-import ProductManage from "../containers/System/ProductManage";
+import CreateUser from "../containers/System/CreateUser";
+
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Header";
 
@@ -12,11 +13,11 @@ class System extends Component {
     return (
       <React.Fragment>
         {this.props.isLoggedIn && <Header />}
-        <div className="system-container">
-          <div className="system-list">
+        <div className="system-container" style={{ height: "100%" }}>
+          <div className="system-list" style={{ height: "100%" }}>
             <Switch>
               <Route path="/system/user-manage" component={UserManage} />
-              <Route path="/system/product-manage" component={ProductManage} />
+              <Route path="/system/CreateUser" component={CreateUser} />
               <Route
                 path="/system/register-package-group-or-account"
                 component={RegisterPackageGroupOrAcc}
